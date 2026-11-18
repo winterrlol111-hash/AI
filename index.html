@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>My AI</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0b0d10;color:white;font-family:Arial,sans-serif}.app{max-width:680px;margin:auto;height:100dvh;display:flex;flex-direction:column}header{padding:18px;border-bottom:1px solid #333;font-size:21px;font-weight:bold}#chat{flex:1;overflow:auto;padding:16px}.msg{padding:12px 15px;border-radius:16px;margin:9px 0;max-width:85%;white-space:pre-wrap;line-height:1.5}.ai{background:#252c34}.user{background:#2563eb;margin-left:auto}form{display:flex;gap:8px;padding:12px;background:#151a20}input{flex:1;min-width:0;padding:14px;border-radius:15px;border:1px solid #444;background:#20262d;color:white;font-size:16px}button{border:0;border-radius:15px;padding:0 18px;background:#2878ed;color:white;font-weight:bold;font-size:16px}
+</style></head><body><div class="app"><header>MY AI</header><div id="chat"></div><form id="form"><input id="q" placeholder="メッセージを入力…" autocomplete="off"><button>送信</button></form></div>
+<script>
+const chat=document.getElementById('chat'),form=document.getElementById('form'),q=document.getElementById('q');
+function add(t,c){let d=document.createElement('div');d.className='msg '+c;d.textContent=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
+function reply(s){let t=s.toLowerCase();if(/こんにちは|hello|やあ/.test(t))return 'こんにちは！My AIだよ。何を話そうか？';if(/名前/.test(t))return '僕はMy AI！';if(/マイクラ|minecraft/.test(t))return 'Minecraftのことだね！PvP、MOD、プラグイン、サーバー作りについて話せるよ。';if(/ありがとう/.test(t))return 'どういたしまして！';return '質問ありがとう！これはまだ簡易デモ版だよ。本物のAIモデルに接続すると、もっと幅広い質問に答えられるようになるよ。\n\n質問：'+s}
+form.addEventListener('submit',e=>{e.preventDefault();let s=q.value.trim();if(!s)return;add(s,'user');q.value='';setTimeout(()=>add(reply(s),'ai'),250)});
+add('こんにちは！My AIへようこそ。まずは話しかけてみてね！','ai');
+</script></div></body></html>
